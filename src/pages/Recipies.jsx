@@ -5,14 +5,14 @@ const Recipies = () => {
   const { data } = useContext(recipecontext);
 
   return (
-    <div className="p-6 bg-gray-900 min-h-screen text-white">
+    <div className="p-6 bg-gray-800 min-h-screen text-white">
       <h1 className="text-3xl font-bold mb-8 text-center text-yellow-400">🍽️ My Recipes</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.map((recipe) => (
           <div
             key={recipe.id}
-            className="bg-gray-800 rounded-2xl shadow-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 border border-gray-700"
+            className="bg-gray-900 rounded-2xl shadow-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 border border-gray-700"
           >
             {recipe.image && (
               <img
