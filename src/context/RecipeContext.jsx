@@ -19,7 +19,6 @@ const RecipeContext = (props) => {
     }
   }, []);
 
-
   const updateRecipe = (id, updatedRecipe) => {
     setdata(prevData =>
       prevData.map(recipe =>
@@ -28,11 +27,19 @@ const RecipeContext = (props) => {
     );
   };
 
+  const toggleFavorite = (id) => {
+    const updatedData = data.map(recipe =>
+      recipe.id === id ? { ...recipe, favorite: !recipe.favorite } : recipe
+    );
+    setdata(updatedData);
+    localStorage.setItem("recipes", JSON.stringify(updatedData));
+  };
+
   return (
-    <recipecontext.Provider value={{ data, setdata, updateRecipe }}>
+    <recipecontext.Provider value={{ data, setdata, updateRecipe, toggleFavorite }}>
       {props.children}
     </recipecontext.Provider>
   );
 };
 
-export default RecipeContext;  // default export
+export default RecipeContext; // default export

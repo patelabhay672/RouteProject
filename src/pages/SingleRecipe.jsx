@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 const SingleRecipe = () => {
   const { id } = useParams();
-  const { data, updateRecipe } = useContext(recipecontext);
+  const { data, updateRecipe, toggleFavorite } = useContext(recipecontext);
   const navigate = useNavigate();
 
   const recipe = data.find(r => r.id === id);
@@ -29,21 +29,17 @@ const SingleRecipe = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    console.log(e.target.value);
   };
 
   const handleSave = () => {
     updateRecipe(id, formData);
-
-    // ✅ Local Storage Update
     const updatedData = data.map(recipe =>
       recipe.id === id ? { ...recipe, ...formData } : recipe
     );
     localStorage.setItem("recipes", JSON.stringify(updatedData));
-    toast.success("Done Updation")
+    toast.success("Done Updation");
     navigate(-1);
   };
-
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
@@ -55,7 +51,6 @@ const SingleRecipe = () => {
       </button>
 
       <div className="flex flex-col md:flex-row w-full max-w-5xl bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
-        {/* Left: Image */}
         <div className="md:w-1/2 h-64 md:h-auto">
           {recipe.image ? (
             <img
@@ -70,9 +65,16 @@ const SingleRecipe = () => {
           )}
         </div>
 
-        {/* Right: Form */}
         <div className="md:w-1/2 p-6 space-y-4">
-          <h2 className="text-2xl font-bold text-yellow-400 mb-2">✏️ Edit Recipe</h2>
+          <h2 className="text-2xl font-bold text-yellow-400 mb-2 flex justify-between items-center">
+            ✏️ Edit Recipe
+            <span
+              className="text-3xl cursor-pointer"
+              onClick={() => toggleFavorite(id)}
+            >
+              {recipe.favorite ? '❤️' : '🤍'}
+            </span>
+          </h2>
 
           <div>
             <label className="text-sm text-gray-400">Title</label>
