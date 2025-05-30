@@ -53,11 +53,11 @@ const Home = () => {
                 className="h-64 w-full object-cover"
               />
               <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/60 to-transparent">
-    <h2 className="text-lg font-semibold text-yellow-300 drop-shadow-md">
-      {recipe.title}
-    </h2>
-    <p className="text-sm text-gray-200 drop-shadow-md">{recipe.category}</p>
-  </div>
+                <h2 className="text-lg font-semibold text-yellow-300 drop-shadow-md">
+                  {recipe.title}
+                </h2>
+                <p className="text-sm text-gray-200 drop-shadow-md">{recipe.category}</p>
+              </div>
             </div>
           ))}
         </div>

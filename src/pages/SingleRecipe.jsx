@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { recipecontext } from '../context/RecipeContext';
+import toast from 'react-hot-toast';
 
 const SingleRecipe = () => {
   const { id } = useParams();
@@ -29,14 +30,20 @@ const SingleRecipe = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     console.log(e.target.value);
-    
   };
 
   const handleSave = () => {
     updateRecipe(id, formData);
-    alert("Recipe updated successfully!");
+
+    // ✅ Local Storage Update
+    const updatedData = data.map(recipe =>
+      recipe.id === id ? { ...recipe, ...formData } : recipe
+    );
+    localStorage.setItem("recipes", JSON.stringify(updatedData));
+    toast.success("Done Updation")
     navigate(-1);
   };
+
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">

@@ -3,8 +3,10 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { recipecontext } from '../context/RecipeContext'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
+  const navigate = useNavigate()
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     mode: "onSubmit"
   })
@@ -12,9 +14,13 @@ const Create = () => {
 
   const submitHandler = (recipe) => {
     recipe.id = nanoid()
-    setdata([...data, recipe])
+    const copydata = [...data]
+    copydata.push(recipe)
+    setdata(copydata)
+    localStorage.setItem("recipes", JSON.stringify(copydata))
     reset()
     toast.success("🎉 Recipe added successfully!")
+    navigate('/recipes')
   }
 
   return (

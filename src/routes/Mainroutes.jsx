@@ -8,10 +8,10 @@ import SingleRecipe from "../pages/SingleRecipe"
 const Mainroutes = () => {
     return <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/recipes" element={<Recipies/>} />
+        <Route path="/recipes" element={<Recipies />} />
         <Route path="/recipes/:id" element={<SingleRecipe />} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/create" element={<Create/>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/create" element={<Create />} />
     </Routes>
 }
 
